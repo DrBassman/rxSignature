@@ -21,6 +21,7 @@
                     }
                 ?>
                 </select>
+                <input type="hidden" name="mode" value="get_sig">
                 <input type="submit" value="Sign Rx">
             </form>
         </div>
