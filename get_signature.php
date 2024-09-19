@@ -18,10 +18,11 @@
                 echo "[$pdfChosen]<br>";
             ?>
             <iframe src="<?php echo "$pdfChosen"; ?>" width="100%" height="270"></iframe>
-            <p>To comply with 16 CFR Part 456 Ophthalmic Practice Rule (eyeglass rule) June, 2024 (rule),
+            <p>To comply with 16 CFR Part 456 Ophthalmic Practice Rule (eyeglass rule) June, 2024; and
+                to comply with 16 CFR Part 315 Contact Lens Rule July, 2004 (rules);
                 Losh Optometry LLC is required to have the patient sign a copy of their prescription at the conclusion
-                of their examination.  Losh Optometry LLC is required by the rule <i>to keep the receipts on file for three years</i>.
-                Losh Optometry LLC has developed this paperless method to comply with this rule.
+                of their examination.  Losh Optometry LLC is required by the rules <i>to keep the receipts on file for three years</i>.
+                Losh Optometry LLC has developed this paperless method to comply with rules.
             </p>
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
             <input type="hidden" name="mode" value="gen_pdf">
