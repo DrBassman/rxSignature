@@ -26,9 +26,10 @@
     $pdf->SetXY(0, 8.8);
     $pdf->Write(0, "\n$date:\n");
     $pdf->Write(0, "1)  I consent for my signature to be electronically captured and affixed to the copy of my prescription shown here.\n\n");
-    $pdf->Write(0, "2)  I acknowledge my prescription was issued to me at the conclusion of my examination.");
+    $pdf->Write(0, "2)  I confirm my prescription was issued to me at the conclusion of my examination.");
 
     ob_end_clean();
     $pdf->Output(__DIR__ . "/output/" . $fileDate . "-rxRctVerification.pdf", "F");
     $pdf->Output($fileDate . "-rxRctVerification.pdf", "I");
+    unlink(__DIR__ . "/input/" . $pdfChosen);
 ?>
