@@ -20,6 +20,8 @@
     $tplIdx = $pdf->importPage(1);
     $pdf->useImportedPage($tplIdx);
 
+    $pdf->Rect(0.375, 9, 7.5, 2.12, 'DF', '', array(249, 226, 51));
+
     $pdf->ImageSVG('@' . $svgData, 0.25,10, 2.5);
 
     $pdf->SetFont('Helvetica');
@@ -31,5 +33,5 @@
     ob_end_clean();
     $pdf->Output(__DIR__ . "/output/" . $fileDate . "-rxRctVerification.pdf", "F");
     $pdf->Output($fileDate . "-rxRctVerification.pdf", "I");
-    unlink(__DIR__ . "/input/" . $pdfChosen);
+    //unlink(__DIR__ . "/input/" . $pdfChosen);
 ?>
