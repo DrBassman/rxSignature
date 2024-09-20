@@ -16,7 +16,6 @@
 
             <?php
                 $pdfChosen = $_POST["in_pdf"];
-                echo "[$pdfChosen]<br>";
             ?>
             <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="360"></iframe>
             <p>To comply with 16 CFR Part 456 ophthalmic practice rule June, 2024; and
@@ -48,9 +47,11 @@
                         <button type="button" class="button" data-action="undo" title="Ctrl-Z">Undo</button>
                         <button type="button" class="button" data-action="redo" title="Ctrl-Y">Redo</button>
                     </div>
+                    <div class="column">
+                        <input type="submit" value="Apply Signature">
+                    </div>
                 </div>
             </div>
-            <input type="submit" value="Apply Signature">
             </form>
             <hr>
         </div>
