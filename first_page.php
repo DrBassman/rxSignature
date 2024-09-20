@@ -16,6 +16,7 @@
                 <select name="in_pdf">Choose a document to sign:
                 <?php
                     echo "<option value=\"\">Select File</option>";
+                    chdir(__DIR__ . "/input");
                     foreach (glob ("*.[pP][dD][fF]") as $file) {
                         echo "<option value=\"$file\">$file</option>";
                     }
