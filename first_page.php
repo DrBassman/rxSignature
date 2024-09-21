@@ -6,20 +6,23 @@
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     </head>
     <body>
-        <?php require __DIR__ . "/page_header.php"; ?>
+        <?php require __DIR__ . "/page_header.php"; ?><div class="container">
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-                <select name="in_pdf">Choose a document to sign:
-                <?php
-                    echo "<option value=\"\">Select File</option>";
-                    chdir(__DIR__ . "/input");
-                    foreach (glob ("*.[pP][dD][fF]") as $file) {
-                        echo "<option value=\"$file\">$file</option>";
-                    }
-                ?>
-                </select>
+                <div class="form-group">
+                    <label for="fselect">Choose the document(s) to sign:</label>
+                    <select multiple class="form-control" id="fselect" name="in_pdf" size="10">Choose a document to sign:
+                        <?php
+                            chdir(__DIR__ . "/input");
+                            foreach (glob ("*.[pP][dD][fF]") as $file) {
+                                echo "<option value=\"$file\">$file</option>";
+                            }
+                        ?>
+                    </select>
+                </div>
                 <input type="hidden" name="mode" value="get_sig">
-                <input type="submit" value="Sign Rx">
-            </form>
-        <?php require __DIR__ . "/page_footer.php"; ?>
+                <input type="submit" class="btn btn-primary" value="Sign Rx(s)">
+                <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Refresh</a>
+                </form>
+        </div><?php require __DIR__ . "/page_footer.php"; ?>
     </body>
 </html>

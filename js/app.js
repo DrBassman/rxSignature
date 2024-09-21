@@ -129,7 +129,7 @@ greenButton.addEventListener("click", () => {
 });
 
 blueButton.addEventListener("click", () => {
-  signaturePad.penColor = "rgb(0, 0, 255)";
+  signaturePad.penColor = "rgb(0, 0, 192)";
 });
 
 blackButton.addEventListener("click", () => {
