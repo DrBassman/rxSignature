@@ -3,6 +3,11 @@ const canvasWrapper = document.getElementById("canvas-wrapper");
 const clearButton = wrapper.querySelector("[data-action=clear]");
 const undoButton = wrapper.querySelector("[data-action=undo]");
 const redoButton = wrapper.querySelector("[data-action=redo]");
+const redButton = wrapper.querySelector("[data-action=red-pen]");
+const greenButton = wrapper.querySelector("[data-action=green-pen]");
+const blueButton = wrapper.querySelector("[data-action=blue-pen]");
+const blackButton = wrapper.querySelector("[data-action=black-pen]");
+const purpleButton = wrapper.querySelector("[data-action=purple-pen]");
 let undoData = [];
 const canvas = wrapper.querySelector("canvas");
 const signaturePad = new SignaturePad(canvas, {
@@ -10,7 +15,6 @@ const signaturePad = new SignaturePad(canvas, {
   // this option can be omitted if only saving as PNG or SVG
   // backgroundColor: 'rgb(255, 255, 255)'
 });
-
 // Adjust canvas coordinate space taking into account pixel ratio,
 // to make it look crisp on mobile devices.
 // This also causes canvas to be cleared.
@@ -114,4 +118,24 @@ redoButton.addEventListener("click", () => {
     signaturePad.fromData(data);
   }
   document.getElementById('svgData').value = signaturePad.toSVG();
+});
+
+redButton.addEventListener("click", () => {
+  signaturePad.penColor = "rgb(255, 0, 0)";
+});
+
+greenButton.addEventListener("click", () => {
+  signaturePad.penColor = "rgb(0, 255, 0)";
+});
+
+blueButton.addEventListener("click", () => {
+  signaturePad.penColor = "rgb(0, 0, 255)";
+});
+
+blackButton.addEventListener("click", () => {
+  signaturePad.penColor = "rgb(0, 0, 0)";
+});
+
+purpleButton.addEventListener("click", () => {
+  signaturePad.penColor = "rgb(148, 0, 211)";
 });

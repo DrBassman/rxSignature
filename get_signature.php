@@ -5,14 +5,23 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href="css/signature-pad.css">
+        <script>
+            function refused_toggled(element) {
+                //element.checked = !element.checked;
+                cc = document.getElementById("capConsent");
+                ra = document.getElementById("rxAck");
+                if (element.checked) {
+                    cc.checked = false;
+                    ra.checked = false;
+                } else {
+                    cc.checked = true;
+                    ra.checked = true;
+                }
+            }
+        </script>
     </head>
     <body>
-        <div class="container">
-            <div class="jumbotron">
-                <img class="rounded float-right" src="/images/lol-logo.png" alt="Logo">
-                <h1>Signatures for Rx's</h1>
-                <p>Bull$|-|it rule from tyrants!</p>
-            </div>
+        <?php require __DIR__ . "/page_header.php"; ?>
 
             <?php
                 $pdfChosen = $_POST["in_pdf"];
@@ -29,15 +38,18 @@
             <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
             <input type="hidden" id="svgData" name="svgData" value="">
             <ul>
-                <li><input type="checkbox" name="capConsent"> I consent for my signature to be electronically captured and affixed
+                <li><input type="checkbox" name="capConsent" id="capConsent" checked> I consent for my signature to be electronically captured and affixed
                  to the copy of my prescription shown here.
-                <li><input type="checkbox" name="rxAck"> I confirm that my prescription was issued to me at the conclusion of my examination.
+                <li><input type="checkbox" name="rxAck" id="rxAck" checked> I confirm that my prescription was issued to me at the conclusion of my examination.
+                <br>
+                <br>
+                <li><input type="checkbox" name="ptRefused" onchange="refused_toggled(this)">Patient REFUSED to sign Rx.</li>
             </ul>
-        </div>
+        <?php require __DIR__ . "/page_footer.php"; ?>
         <div id="signature-pad" class="signature-pad container">
             <hr>
             <div id="canvas-wrapper" class="signature-pad--body">
-              <canvas></canvas>
+              <canvas id="lol_sig_canvas" style="background-color: rgb(249, 226, 51);"></canvas>
             </div>
             <div class="signature-pad--footer">
               <div class="description">Sign above</div>
@@ -46,6 +58,13 @@
                         <button type="button" class="button clear" data-action="clear">Clear</button>
                         <button type="button" class="button" data-action="undo" title="Ctrl-Z">Undo</button>
                         <button type="button" class="button" data-action="redo" title="Ctrl-Y">Redo</button>
+                        <br>
+                        Pen Color<br>
+                        <button type="button" class="button" data-action="red-pen">Red</button>
+                        <button type="button" class="button" data-action="green-pen">Green</button>
+                        <button type="button" class="button" data-action="blue-pen">Blue</button>
+                        <button type="button" class="button" data-action="black-pen">Black</button>
+                        <button type="button" class="button" data-action="purple-pen">Purple</button>
                     </div>
                     <div class="column">
                         <input type="submit" value="Apply Signature">
