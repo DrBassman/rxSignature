@@ -10,6 +10,7 @@
         <?php 
             require __DIR__ . "/configfile.php";
             $pdfChosen = $_POST["pdfChosen"];
+            $pdfsChosen = unserialize(base64_decode($_POST["pdfsChosen"]));
             $capConsent = $_POST["capConsent"];
             $ptRefused = $_POST["ptRefused"];
             $rxAck = $_POST["rxAck"];
@@ -57,7 +58,12 @@
             $pdf->Output($output_dir . $fileDate . "-rxRctVerification.pdf", "F");
             //$pdf->Output($fileDate . "-rxRctVerification.pdf", "I");
             unlink($input_dir . $pdfChosen);
-        ?>
+            if($remove_input_files) {
+                foreach ($pdfsChosen as $file) {
+                    unlink($input_dir . $file);
+                }
+            }
+?>
         <a href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">Signature successfully captured.</a><br>
         <a href="/rxSignature/">Capture another</a>
  <?php require __DIR__ . "/page_footer.php"; ?>

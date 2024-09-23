@@ -43,9 +43,6 @@
                         $pdf->AddPage($size['orientation'], $size);
                         $pdf->useTemplate($templateId);
                     }
-                    if($remove_input_files) {
-                        unlink($input_dir . $file);
-                    }
                 }
                 $pdf->Output($input_dir . $pdfChosen, "F");
             ?>
@@ -58,6 +55,7 @@
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
             <input type="hidden" name="mode" value="gen_pdf">
             <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
+            <input type="hidden" name="pdfsChosen" value="<?php echo base64_encode(serialize($pdfsChosen)); ?>">
             <input type="hidden" id="svgData" name="svgData" value="">
             <ul>
                 <li><input type="checkbox" name="capConsent" id="capConsent" checked>
