@@ -21,38 +21,60 @@
         </script>
     </head>
     <body>
+        <?php require __DIR__ . "/configfile.php"; ?>
         <?php require __DIR__ . "/page_header.php"; ?>
 
             <?php
-                $pdfChosen = $_POST["in_pdf"];
+                use \setasign\Fpdi\Tcpdf\Fpdi;
+                require_once('tcpdf/tcpdf.php');
+                require_once('fpdi/src/autoload.php');
+                
+                $pdfsChosen = $_POST["in_pdf"];
+                $pdfChosen = ".tmp_" . $pdfsChosen[0];
+                $pdf = new Fpdi();
+                $pdf->setPrintHeader(false);
+                $pdf->setPrintFooter(false);
+                $pdf->SetAutoPageBreak(false, 0);    
+                foreach ($pdfsChosen as $file) {
+                    $pageCount = $pdf->setSourceFile($input_dir . $file);
+                    for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                        $templateId = $pdf->importPage($pageNo);
+                        $size = $pdf->getTemplateSize($templateId);
+                        $pdf->AddPage($size['orientation'], $size);
+                        $pdf->useTemplate($templateId);
+                    }
+                    if($remove_input_files) {
+                        unlink($input_dir . $file);
+                    }
+                }
+                $pdf->Output($input_dir . $pdfChosen, "F");
             ?>
-            <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="360"></iframe>
             <div class="container">
-            <p>To comply with <i>16 CFR Part 456 ophthalmic practice rule</i> June, 2024; and
-                to comply with <i>16 CFR Part 315 contact lens rule</i> July, 2004 (rules);
-                Losh Optometry LLC is required to have the patient sign a copy of their prescription at the conclusion
-                of their examination.  Losh Optometry LLC is required by the rules <i>to keep the receipts on file for three years</i>.
-                Losh Optometry LLC has developed this paperless method to comply with rules.
-            </p>
+                <p><?php echo "$get_sig_explanation"; ?></p>
+            </div>
+            <div class="container">
+                <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="360"></iframe>
             </div>
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
             <input type="hidden" name="mode" value="gen_pdf">
             <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
             <input type="hidden" id="svgData" name="svgData" value="">
-            <ul class="list-group">
-                <li class="list-group-item"><input type="checkbox" name="capConsent" id="capConsent" checked> I consent for my signature to be electronically captured and affixed
-                 to the copy of my prescription(s) shown here.
-                <li class="list-group-item"><input type="checkbox" name="rxAck" id="rxAck" checked> I confirm that my prescription was issued to me,
-                 in my preferred medium, at the conclusion of my examination.
+            <ul>
+                <li><input type="checkbox" name="capConsent" id="capConsent" checked>
+                    <?php echo "$get_sig_consent"; ?>
+                </li>
+                <li><input type="checkbox" name="rxAck" id="rxAck" checked>
+                    <?php echo "$get_sig_ack"; ?>
+                </li>
                 <br>
                 <br>
-                <li class="list-group-item"><input type="checkbox" name="ptRefused" onchange="refused_toggled(this)"> Patient REFUSED to sign Rx.</li>
+                <li><input type="checkbox" name="ptRefused" onchange="refused_toggled(this)"><?php echo "$get_sig_refused"; ?></li>
             </ul>
         <?php require __DIR__ . "/page_footer.php"; ?>
         <div id="signature-pad" class="signature-pad container">
             <hr>
             <div id="canvas-wrapper" class="signature-pad--body">
-              <canvas id="lol_sig_canvas" style="background-color: rgb(249, 226, 51);"></canvas>
+              <canvas id="lol_sig_canvas" style="background-color: <?php echo "$get_sig_pad_color"; ?>"></canvas>
             </div>
             <div class="signature-pad--footer">
               <div class="description">Sign above</div>

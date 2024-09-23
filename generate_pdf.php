@@ -8,11 +8,16 @@
     <body>
         <?php require __DIR__ . "/page_header.php"; ?>
         <?php 
+            require __DIR__ . "/configfile.php";
             $pdfChosen = $_POST["pdfChosen"];
             $capConsent = $_POST["capConsent"];
             $ptRefused = $_POST["ptRefused"];
             $rxAck = $_POST["rxAck"];
             $svgData = $_POST["svgData"];
+            $stampheight = 2.1875;
+            $sigheight = 1.1875;
+            $bmargin = 0.25;
+            $tmargin = -0.21875;
 
             date_default_timezone_set('America/Chicago');
             $curDtTime = time();
@@ -25,30 +30,35 @@
             $pdf->setPrintHeader(false);
             $pdf->setPrintFooter(false);
             $pdf->SetAutoPageBreak(false, 0);
-            $pdf->AddPage();
-            $pdf->setSourceFile(__DIR__ . "/input/" . $pdfChosen);
-            $tplIdx = $pdf->importPage(1);
-            $pdf->useImportedPage($tplIdx);
+            $pageCount = $pdf->setSourceFile($input_dir . $pdfChosen);
+            for ($pageNo = 1; $pageNo <= $pageCount; $pageNo++) {
+                $tplIdx = $pdf->importPage($pageNo);
+                $size = $pdf->getTemplateSize($tplIdx);
+                $width = $size['width'];
+                $height = $size['height'];
+                $pdf->AddPage($size['orientation'], $size);
+                $pdf->useImportedPage($tplIdx);
 
-            $pdf->Rect(0.375, 8.875, 7.5, 2.375, 'DF', '', array(249, 226, 51));
+                $pdf->Rect(0.375, $height - $stampheight - $bmargin, 7.5, $stampheight, 'DF', '', $pdf_stamp_color);
 
-            $pdf->ImageSVG('@' . $svgData, 0.5,10, 2.5);
+                $pdf->ImageSVG('@' . $svgData, 0.5, $height - $sigheight, 2.5);
 
-            $pdf->SetFont('Helvetica');
-            $pdf->SetXY(0, 8.6875);
-            $pdf->Write(0, "\n$date:\n");
-            if ($ptRefused) {
-                $pdf->Write(0, "I certify that the patient or guardian REFUSED to sign acknowlegment receipt.");
-            } else {
-                $pdf->Write(0, "1)  I consent for my signature to be electronically captured and affixed to the copy of my prescription shown here.\n\n");
-                $pdf->Write(0, "2)  I confirm that my prescription was issued to me, in my preferred medium, at the conclusion of my examination.");
+                $pdf->SetFont('Helvetica');
+                $pdf->SetXY(0, $height - $stampheight - $bmargin + $tmargin);
+                $pdf->Write(0, "\n$date:\n");
+                if ($ptRefused) {
+                    $pdf->Write(0, "$get_sig_refused");
+                } else {
+                    $pdf->Write(0, "$get_sig_consent\n\n");
+                    $pdf->Write(0, "$get_sig_ack");
+                }
             }
             //ob_end_clean();
-            $pdf->Output(__DIR__ . "/output/" . $fileDate . "-rxRctVerification.pdf", "F");
+            $pdf->Output($output_dir . $fileDate . "-rxRctVerification.pdf", "F");
             //$pdf->Output($fileDate . "-rxRctVerification.pdf", "I");
-            unlink(__DIR__ . "/input/" . $pdfChosen);
+            unlink($input_dir . $pdfChosen);
         ?>
-        <a href="output/<?php echo "{$fileDate}-rxRctVerification.pdf"?>">Signature successfully captured.</a><br>
+        <a href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">Signature successfully captured.</a><br>
         <a href="/rxSignature/">Capture another</a>
  <?php require __DIR__ . "/page_footer.php"; ?>
         </body>

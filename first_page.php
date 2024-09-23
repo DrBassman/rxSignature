@@ -6,13 +6,16 @@
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     </head>
     <body>
-        <?php require __DIR__ . "/page_header.php"; ?><div class="container">
+        <?php require __DIR__ . "/configfile.php"; ?>
+        <?php require __DIR__ . "/page_header.php"; ?>
+        <div class="container">
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <div class="form-group">
                     <label for="fselect">Choose the document(s) to sign:</label>
-                    <select multiple class="form-control" id="fselect" name="in_pdf" size="10">Choose a document to sign:
+                    <select multiple class="form-control" id="fselect" name="in_pdf[]" size="10">Choose a document to sign:
                         <?php
-                            chdir(__DIR__ . "/input");
+                            echo "input_dir [{$input_dir}]";
+                            chdir($input_dir);
                             foreach (glob ("*.[pP][dD][fF]") as $file) {
                                 echo "<option value=\"$file\">$file</option>";
                             }
