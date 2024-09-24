@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
     </head>
     <body>
         <?php require __DIR__ . "/page_header.php"; ?>
@@ -63,9 +63,10 @@
                     unlink($input_dir . $file);
                 }
             }
-?>
+        ?>
+        <!-- kludge -- will not work if output/ is not where files are created -->
         <a href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">Signature successfully captured.</a><br>
-        <a href="/rxSignature/">Capture another</a>
- <?php require __DIR__ . "/page_footer.php"; ?>
-        </body>
+        <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Capture another</a>
+        <?php require __DIR__ . "/page_footer.php"; ?>
+    </body>
 </html>
