@@ -12,7 +12,7 @@
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <div class="form-group">
                     <label for="fselect">Choose the document(s) to sign:</label>
-                    <select multiple class="form-control" id="fselect" name="in_pdf[]" size="10">Choose a document to sign:
+                    <select multiple class="form-control" id="fselect" name="in_pdf[]" size="10" required>Choose a document to sign:
                         <?php
                             echo "input_dir [{$input_dir}]";
                             chdir($input_dir);
