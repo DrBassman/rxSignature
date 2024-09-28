@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap5.min.css">
     </head>
     <body>
         <?php require __DIR__ . "/page_header.php"; ?>
@@ -68,5 +68,6 @@
         <a href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">Signature successfully captured.</a><br>
         <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Capture another</a>
         <?php require __DIR__ . "/page_footer.php"; ?>
+        <script src="js/bootstrap5.bundle.min.js"></script>
     </body>
 </html>

@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap5.min.css">
         <link rel="stylesheet" href="css/signature-pad.css">
         <script>
             function refused_toggled(element) {
@@ -107,6 +107,7 @@
             </form>
         </div>
         <script src="js/signature_pad.umd.min.js"></script>
-        <script src="js/app.js"></script>        
+        <script src="js/app.js"></script>
+        <script src="js/bootstrap5.bundle.min.js></script>
     </body>
 </html>
