@@ -15,10 +15,6 @@
             $ptRefused = $_POST["ptRefused"];
             $rxAck = $_POST["rxAck"];
             $svgData = $_POST["svgData"];
-            $stampheight = 2.1875;
-            $sigheight = 1.1875;
-            $bmargin = 0.25;
-            $tmargin = -0.21875;
 
             date_default_timezone_set('America/Chicago');
             $curDtTime = time();
@@ -40,12 +36,12 @@
                 $pdf->AddPage($size['orientation'], $size);
                 $pdf->useImportedPage($tplIdx);
 
-                $pdf->Rect(0.375, $height - $stampheight - $bmargin, 7.5, $stampheight, 'DF', '', $pdf_stamp_color);
+                $pdf->Rect(0.375, $height - 2.625, 7.5, 2.1875, 'DF', '', $pdf_stamp_color);
 
-                $pdf->ImageSVG('@' . $svgData, 0.5, $height - $sigheight, 2.5);
+                $pdf->ImageSVG('@' . $svgData, 0.5, $height - 1.375, 0, 0.9375);
 
                 $pdf->SetFont('Helvetica');
-                $pdf->SetXY(0, $height - $stampheight - $bmargin + $tmargin);
+                $pdf->SetXY(0, $height - 2.1875 - 0.25 + -0.375);
                 $pdf->Write(0, "\n$date:\n");
                 if ($ptRefused) {
                     $pdf->Write(0, "$get_sig_refused");
