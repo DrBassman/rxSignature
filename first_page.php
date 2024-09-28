@@ -12,20 +12,19 @@
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <div class="form-group">
                     <label for="fselect">Choose the document(s) to sign:</label>
-                    <select multiple class="form-control" id="fselect" name="in_pdf[]" size="10" required>Choose a document to sign:
+                    <select multiple class="form-select" id="fselect" name="in_pdf[]" required>Choose a document to sign:
                         <?php
-                            echo "input_dir [{$input_dir}]";
                             chdir($input_dir);
                             foreach (glob ("*.[pP][dD][fF]") as $file) {
-                                echo "<option value=\"$file\">$file</option>";
+                                echo "\n<option value=\"$file\">$file</option>";
                             }
                         ?>
                     </select>
+                    <input type="hidden" name="mode" value="get_sig">
+                    <input type="submit" class="btn btn-outline-primary" value="Sign Rx(s)">
+                    <a class="btn btn-outline-secondary" href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Refresh</a>
                 </div>
-                <input type="hidden" name="mode" value="get_sig">
-                <input type="submit" class="btn btn-primary" value="Sign Rx(s)">
-                <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Refresh</a>
-                </form>
+            </form>
         </div><?php require __DIR__ . "/page_footer.php"; ?>
         <script src="js/bootstrap5.bundle.min.js"></script>
     </body>

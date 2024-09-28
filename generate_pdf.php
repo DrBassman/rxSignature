@@ -61,8 +61,8 @@
             }
         ?>
         <!-- kludge -- will not work if output/ is not where files are created -->
-        <a href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">Signature successfully captured.</a><br>
-        <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Capture another</a>
+        <a class="btn btn-outline-secondary" href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">View signed Rx</a><br>
+        <a class="btn btn-outline-primary" href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Capture another</a>
         <?php require __DIR__ . "/page_footer.php"; ?>
         <script src="js/bootstrap5.bundle.min.js"></script>
     </body>

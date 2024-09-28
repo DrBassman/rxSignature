@@ -47,44 +47,32 @@
                 $pdf->Output($input_dir . $pdfChosen, "F");
             }
         ?>
-            <div class="container">
+            <div class="container alert alert-info">
                 <p><?php echo "$get_sig_explanation"; ?></p>
             </div>
             <div class="container">
-                <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="360"></iframe>
+                <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="480"></iframe>
             </div>
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <input type="hidden" name="mode" value="gen_pdf">
                 <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
                 <input type="hidden" name="pdfsChosen" value="<?php echo base64_encode(serialize($pdfsChosen)); ?>">
                 <input type="hidden" id="svgData" name="svgData" value="">
-                <ul>
-                    <li><input type="checkbox" name="capConsent" id="capConsent" checked>
-                        <?php echo "$get_sig_consent"; ?>
+                <ul class="list-group form-check">
+                    <li class="list-group-item"><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="capConsent" id="capConsent" checked>
+                        <?php echo "$get_sig_consent"; ?></div>
                     </li>
-                    <li><input type="checkbox" name="rxAck" id="rxAck" checked>
-                        <?php echo "$get_sig_ack"; ?>
+                    <li class="list-group-item"><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="rxAck" id="rxAck" checked>
+                        <?php echo "$get_sig_ack"; ?></div>
                     </li>
                     <br>
                     <br>
-                    <li><input type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
+                    <li class="list-group-item"><input class="form-check-input" type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
                         <?php echo "$get_sig_refused"; ?>
                     </li>
                 </ul>
             <?php require __DIR__ . "/page_footer.php"; ?>
         <div id="signature-pad" class="signature-pad container">
-            <div class="signature-pad--actions">
-                <div class="column">
-                    Pen Color<br>
-                    <div class="btn-group">
-                        <button type="button" class="button btn" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>
-                        <button type="button" class="button btn" data-action="green-pen" style="background-color: rgb(0,255,0);"></button>
-                        <button type="button" class="button btn" data-action="blue-pen" style="background-color: rgb(0,0,192);"></button>
-                        <button type="button" class="button btn" data-action="black-pen" style="background-color: rgb(0,0,0);"></button>
-                        <button type="button" class="button btn" data-action="purple-pen" style="background-color: rgb(148,0,211);"></button>
-                    </div>
-                </div>
-            </div>
             <div id="canvas-wrapper" class="signature-pad--body">
               <canvas id="lol_sig_canvas" style="background-color: <?php echo "$get_sig_pad_color"; ?>"></canvas>
             </div>
@@ -92,15 +80,14 @@
               <div class="description">Sign above</div>
                     <div class="signature-pad--actions">
                         <div class="column">
-                            <br>
                             <div class="btn-group">
-                                <button type="button" class="button clear btn" data-action="clear">Clear</button>
-                                <button type="button" class="button btn" data-action="undo" title="Ctrl-Z">Undo</button>
-                                <button type="button" class="button btn" data-action="redo" title="Ctrl-Y">Redo</button>
+                                <button type="button" class="btn btn-outline-secondary" data-action="clear">Clear</button>
+                                <button type="button" class="btn btn-outline-secondary" data-action="undo" title="Ctrl-Z">Undo</button>
+                                <button type="button" class="btn btn-outline-secondary" data-action="redo" title="Ctrl-Y">Redo</button>
                             </div>
                         </div>
                         <div class="column">
-                            <input type="submit" class="btn btn-primary" value="Apply Signature">
+                            <input type="submit" class="btn btn-outline-primary" value="Apply Signature">
                         </div>
                     </div>
                 </div>
