@@ -73,6 +73,18 @@
                 </ul>
             <?php require __DIR__ . "/page_footer.php"; ?>
         <div id="signature-pad" class="signature-pad container">
+            <div class="signature-pad--actions">
+                <div class="column">
+                    Pen Color<br>
+                    <div class="btn-group">
+                        <button type="button" class="button btn" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>
+                        <button type="button" class="button btn" data-action="green-pen" style="background-color: rgb(0,255,0);"></button>
+                        <button type="button" class="button btn" data-action="blue-pen" style="background-color: rgb(0,0,192);"></button>
+                        <button type="button" class="button btn" data-action="black-pen" style="background-color: rgb(0,0,0);"></button>
+                        <button type="button" class="button btn" data-action="purple-pen" style="background-color: rgb(148,0,211);"></button>
+                    </div>
+                </div>
+            </div>
             <div id="canvas-wrapper" class="signature-pad--body">
               <canvas id="lol_sig_canvas" style="background-color: <?php echo "$get_sig_pad_color"; ?>"></canvas>
             </div>
