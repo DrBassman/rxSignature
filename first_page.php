@@ -25,8 +25,8 @@
                         </select>
                         <div class="button-group hollow align-center">
                             <input type="hidden" name="mode" value="get_sig">
-                            <input type="submit" class="button" value="Sign Rx(s)">
                             <a class="button secondary" href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Refresh</a>
+                            <input type="submit" class="button" value="Sign Rx(s)">
                         </div>
                     </form>
                 </div>
