@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap5.min.css">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rx Signature Collector</title>
+        <link rel="stylesheet" href="css/foundation/foundation.css">
+        <link rel="styledheet" href="css/foundation/app.css">
         <link rel="stylesheet" href="css/signature-pad.css">
         <script>
             function refused_toggled(element) {
@@ -47,12 +50,15 @@
                 $pdf->Output($input_dir . $pdfChosen, "F");
             }
         ?>
-            <div class="container alert alert-info">
-                <p><?php echo "$get_sig_explanation"; ?></p>
-            </div>
-            <div class="container">
-                <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="480"></iframe>
-            </div>
+            <div class="grid-x">
+                <div class="cell">
+                    <div class="callout warning">
+                        <p><?php echo "$get_sig_explanation"; ?></p>
+                    </div>
+                </div>
+                <div class="cell">
+                    <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="480"></iframe>
+                </div>
             <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
                 <input type="hidden" name="mode" value="gen_pdf">
                 <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
@@ -65,23 +71,21 @@
                     <li class="list-group-item"><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="rxAck" id="rxAck" checked>
                         <?php echo "$get_sig_ack"; ?></div>
                     </li>
-                    <br>
-                    <br>
+                    <hr>
                     <li class="list-group-item"><input class="form-check-input" type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
                         <?php echo "$get_sig_refused"; ?>
                     </li>
                 </ul>
-            <?php require __DIR__ . "/page_footer.php"; ?>
-        <div id="signature-pad" class="signature-pad container">
+        <div id="signature-pad" class="signature-pad cell medium-12">
             <div class="signature-pad--actions">
                 <div class="column">
                     Pen Color<br>
-                    <div class="btn-group">
-                        <button type="button" class="button btn" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>
-                        <button type="button" class="button btn" data-action="green-pen" style="background-color: rgb(0,255,0);"></button>
-                        <button type="button" class="button btn" data-action="blue-pen" style="background-color: rgb(0,0,192);"></button>
-                        <button type="button" class="button btn" data-action="black-pen" style="background-color: rgb(0,0,0);"></button>
-                        <button type="button" class="button btn" data-action="purple-pen" style="background-color: rgb(148,0,211);"></button>
+                    <div class="button-group">
+                        <button type="button" class="button" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>
+                        <button type="button" class="button" data-action="green-pen" style="background-color: rgb(0,255,0);"></button>
+                        <button type="button" class="button" data-action="blue-pen" style="background-color: rgb(0,0,192);"></button>
+                        <button type="button" class="button" data-action="black-pen" style="background-color: rgb(0,0,0);"></button>
+                        <button type="button" class="button" data-action="purple-pen" style="background-color: rgb(148,0,211);"></button>
                     </div>
                 </div>
             </div>
@@ -92,21 +96,26 @@
               <div class="description">Sign above</div>
                     <div class="signature-pad--actions">
                         <div class="column">
-                            <div class="btn-group">
-                                <button type="button" class="btn btn-outline-secondary" data-action="clear">Clear</button>
-                                <button type="button" class="btn btn-outline-secondary" data-action="undo" title="Ctrl-Z">Undo</button>
-                                <button type="button" class="btn btn-outline-secondary" data-action="redo" title="Ctrl-Y">Redo</button>
+                            <div class="button-group hollow">
+                                <button type="button" class="button secondary" data-action="clear">Clear</button>
+                                <button type="button" class="button secondary" data-action="undo" title="Ctrl-Z">Undo</button>
+                                <button type="button" class="button secondary" data-action="redo" title="Ctrl-Y">Redo</button>
                             </div>
                         </div>
                         <div class="column">
-                            <input type="submit" class="btn btn-outline-primary" value="Apply Signature">
+                            <input type="submit" class="button hollow primary" value="Apply Signature">
                         </div>
                     </div>
                 </div>
             </form>
         </div>
+        <?php require __DIR__ . "/page_footer.php"; ?>
+        </div>
         <script src="js/signature_pad.umd.min.js"></script>
         <script src="js/app.js"></script>
-        <script src="js/bootstrap5.bundle.min.js></script>
+        <script src="js/foundation/vendor/jquery.js"></script>
+        <script src="js/foundation/vendor/what-input.js"></script>
+        <script src="js/foundation/vendor/foundation.js"></script>
+        <script src="js/foundation/app.js"></script>
     </body>
 </html>

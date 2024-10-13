@@ -1,9 +1,12 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <link rel="stylesheet" type="text/css" href="css/bootstrap5.min.css">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Rx Signature Collector</title>
+        <link rel="stylesheet" href="css/foundation/foundation.css">
+        <link rel="stylesheet" href="css/foundation/app.css">
     </head>
     <body>
         <?php require __DIR__ . "/page_header.php"; ?>
@@ -60,10 +63,19 @@
                 }
             }
         ?>
-        <!-- kludge -- will not work if output/ is not where files are created -->
-        <a class="btn btn-outline-secondary" href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">View signed Rx</a><br>
-        <a class="btn btn-outline-primary" href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Capture another</a>
+        <div class="grid-x">
+            <div class="cell">
+                <div class="button-group hollow align-center">
+                <!-- kludge -- will not work if output/ is not where files are created -->
+                <a class="button secondary" href="<?php echo "output/{$fileDate}-rxRctVerification.pdf"?>">View signed Rx</a><br>
+                <a class="button primary" href="<?php echo $_SERVER["REQUEST_URI"]; ?>">Capture another</a>
+                </div>
+            </div>
+        </div>
         <?php require __DIR__ . "/page_footer.php"; ?>
-        <script src="js/bootstrap5.bundle.min.js"></script>
+        <script src="js/foundation/vendor/jquery.js"></script>
+        <script src="js/foundation/vendor/what-input.js"></script>
+        <script src="js/foundation/vendor/foundation.js"></script>
+        <script src="js/foundation/app.js"></script>
     </body>
 </html>
