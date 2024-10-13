@@ -64,18 +64,20 @@
                 <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
                 <input type="hidden" name="pdfsChosen" value="<?php echo base64_encode(serialize($pdfsChosen)); ?>">
                 <input type="hidden" id="svgData" name="svgData" value="">
-                <ul class="list-group form-check">
-                    <li class="list-group-item"><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="capConsent" id="capConsent" checked>
-                        <?php echo "$get_sig_consent"; ?></div>
-                    </li>
-                    <li class="list-group-item"><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="rxAck" id="rxAck" checked>
-                        <?php echo "$get_sig_ack"; ?></div>
-                    </li>
-                    <hr>
-                    <li class="list-group-item"><input class="form-check-input" type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
-                        <?php echo "$get_sig_refused"; ?>
-                    </li>
-                </ul>
+                    <div class="callout warning">
+                        <ul class="form-check">
+                            <li class=""><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="capConsent" id="capConsent" checked>
+                                <?php echo "$get_sig_consent"; ?></div>
+                            </li>
+                            <li class=""><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="rxAck" id="rxAck" checked>
+                                <?php echo "$get_sig_ack"; ?></div>
+                            </li>
+                            <hr>
+                            <li class="list-group-item"><input class="form-check-input" type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
+                                <?php echo "$get_sig_refused"; ?>
+                            </li>
+                        </ul>
+                    </div>
         <div id="signature-pad" class="signature-pad cell medium-12">
             <div class="signature-pad--actions">
                 <div class="column">
