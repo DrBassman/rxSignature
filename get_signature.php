@@ -59,60 +59,68 @@
                 <div class="cell">
                     <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="480"></iframe>
                 </div>
-            <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
-                <input type="hidden" name="mode" value="gen_pdf">
-                <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
-                <input type="hidden" name="pdfsChosen" value="<?php echo base64_encode(serialize($pdfsChosen)); ?>">
-                <input type="hidden" id="svgData" name="svgData" value="">
+                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+                    <input type="hidden" name="mode" value="gen_pdf">
+                    <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
+                    <input type="hidden" name="pdfsChosen" value="<?php echo base64_encode(serialize($pdfsChosen)); ?>">
+                    <input type="hidden" id="svgData" name="svgData" value="">
                     <div class="callout warning">
-                        <ul class="form-check">
-                            <li class=""><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="capConsent" id="capConsent" checked>
-                                <?php echo "$get_sig_consent"; ?></div>
+                        <ul class="no-bullet">
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="capConsent" id="capConsent" checked>
+                                    <?php echo "$get_sig_consent"; ?>
+                                </label>
                             </li>
-                            <li class=""><div class="alert alert-warning"><input class="form-check-input" type="checkbox" name="rxAck" id="rxAck" checked>
-                                <?php echo "$get_sig_ack"; ?></div>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="rxAck" id="rxAck" checked>
+                                    <?php echo "$get_sig_ack"; ?>
+                                </label>
                             </li>
                             <hr>
-                            <li class="list-group-item"><input class="form-check-input" type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
-                                <?php echo "$get_sig_refused"; ?>
+                            <li>
+                                <label>
+                                    <input type="checkbox" name="ptRefused" onchange="refused_toggled(this)">
+                                    <?php echo "$get_sig_refused"; ?>
+                                </label>
                             </li>
                         </ul>
                     </div>
-        <div id="signature-pad" class="signature-pad cell medium-12">
-            <div class="signature-pad--actions">
-                <div class="column">
-                    Pen Color<br>
-                    <div class="button-group">
-                        <button type="button" class="button" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>
-                        <button type="button" class="button" data-action="green-pen" style="background-color: rgb(0,255,0);"></button>
-                        <button type="button" class="button" data-action="blue-pen" style="background-color: rgb(0,0,192);"></button>
-                        <button type="button" class="button" data-action="black-pen" style="background-color: rgb(0,0,0);"></button>
-                        <button type="button" class="button" data-action="purple-pen" style="background-color: rgb(148,0,211);"></button>
-                    </div>
-                </div>
-            </div>
-            <div id="canvas-wrapper" class="signature-pad--body">
-              <canvas id="lol_sig_canvas" style="background-color: <?php echo "$get_sig_pad_color"; ?>"></canvas>
-            </div>
-            <div class="signature-pad--footer">
-              <div class="description">Sign above</div>
-                    <div class="signature-pad--actions">
-                        <div class="column">
-                            <div class="button-group hollow">
-                                <button type="button" class="button secondary" data-action="clear">Clear</button>
-                                <button type="button" class="button secondary" data-action="undo" title="Ctrl-Z">Undo</button>
-                                <button type="button" class="button secondary" data-action="redo" title="Ctrl-Y">Redo</button>
+                    <div id="signature-pad" class="signature-pad cell medium-12">
+                        <div class="signature-pad--actions">
+                            <div class="column">
+                                Pen Color<br>
+                                <div class="button-group">
+                                <button type="button" class="button" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>
+                                <button type="button" class="button" data-action="green-pen" style="background-color: rgb(0,255,0);"></button>
+                                <button type="button" class="button" data-action="blue-pen" style="background-color: rgb(0,0,192);"></button>
+                                <button type="button" class="button" data-action="black-pen" style="background-color: rgb(0,0,0);"></button>
+                                <button type="button" class="button" data-action="purple-pen" style="background-color: rgb(148,0,211);"></button>
                             </div>
                         </div>
-                        <div class="column">
-                            <input type="submit" class="button hollow primary" value="Apply Signature">
-                        </div>
                     </div>
-                </div>
-            </form>
-        </div>
+                    <div id="canvas-wrapper" class="signature-pad--body">
+                        <canvas id="lol_sig_canvas" style="background-color: <?php echo "$get_sig_pad_color"; ?>"></canvas>
+                    </div>
+                    <div class="signature-pad--footer">
+                        <div class="description">Sign above</div>
+                            <div class="signature-pad--actions">
+                                <div class="column">
+                                    <div class="button-group hollow">
+                                        <button type="button" class="button secondary" data-action="clear">Clear</button>
+                                        <button type="button" class="button secondary" data-action="undo" title="Ctrl-Z">Undo</button>
+                                        <button type="button" class="button secondary" data-action="redo" title="Ctrl-Y">Redo</button>
+                                    </div>
+                                </div>
+                                <div class="column">
+                                    <input type="submit" class="button hollow primary" value="Apply Signature">
+                                </div>
+                            </div>
+                        </div>
+                </form>
+            </div>
         <?php require __DIR__ . "/page_footer.php"; ?>
-        </div>
         <script src="js/signature_pad.umd.min.js"></script>
         <script src="js/app.js"></script>
         <script src="js/foundation/vendor/jquery.js"></script>
