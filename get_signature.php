@@ -90,7 +90,7 @@
                     </div>
                 </div>
                 <div class="cell">
-                    <div id="signature-pad" class="signature-pad cell medium-12">
+                    <div id="signature-pad" class="signature-pad">
                         <div class="signature-pad--actions">
                             <div class="column">
                                 Pen Color<br>
