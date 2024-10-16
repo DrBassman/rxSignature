@@ -50,6 +50,7 @@
                 $pdf->Output($input_dir . $pdfChosen, "F");
             }
         ?>
+        <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
             <div class="grid-x">
                 <div class="cell">
                     <div class="callout warning">
@@ -59,7 +60,7 @@
                 <div class="cell">
                     <iframe src="<?php echo "input/$pdfChosen"; ?>" width="100%" height="480"></iframe>
                 </div>
-                <form action="<?php htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="post">
+                <div class="cell">
                     <input type="hidden" name="mode" value="gen_pdf">
                     <input type="hidden" name="pdfChosen" value="<?php echo "$pdfChosen"; ?>">
                     <input type="hidden" name="pdfsChosen" value="<?php echo base64_encode(serialize($pdfsChosen)); ?>">
@@ -87,6 +88,8 @@
                             </li>
                         </ul>
                     </div>
+                </div>
+                <div class="cell">
                     <div id="signature-pad" class="signature-pad cell medium-12">
                         <div class="signature-pad--actions">
                             <div class="column">
@@ -118,9 +121,11 @@
                                 </div>
                             </div>
                         </div>
-                </form>
+                    </div>
+                </div>
             </div>
-        <?php require __DIR__ . "/page_footer.php"; ?>
+        </form>
+            <?php require __DIR__ . "/page_footer.php"; ?>
         <script src="js/signature_pad.umd.min.js"></script>
         <script src="js/app.js"></script>
         <script src="js/foundation/vendor/jquery.js"></script>
