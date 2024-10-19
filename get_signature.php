@@ -92,7 +92,7 @@
                 <div class="cell">
                     <div id="signature-pad" class="signature-pad">
                         <div class="signature-pad--actions">
-                            <div class="column">
+                            <div class="column text-center">
                                 Pen Color<br>
                                 <div class="button-group">
                                 <button type="button" class="button" data-action="red-pen" style="background-color: rgb(255,0,0);"></button>

@@ -15,7 +15,11 @@
             $pdfChosen = $_POST["pdfChosen"];
             $pdfsChosen = unserialize(base64_decode($_POST["pdfsChosen"]));
             $capConsent = $_POST["capConsent"];
-            $ptRefused = $_POST["ptRefused"];
+            if(isset($_POST["ptRefused"])) {
+                $ptRefused = $_POST["ptRefused"];
+            } else {
+                $ptRefused = FALSE;
+            }
             $rxAck = $_POST["rxAck"];
             $svgData = $_POST["svgData"];
 
